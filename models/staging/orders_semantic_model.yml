@@ -1,0 +1,34 @@
+semantic_models:
+  - name: orders
+    model: ref('orders')  # This refers to your orders.sql model
+    description: "Semantic model for the orders data in TPCH sample"
+
+    defaults:
+      agg_time_dimension: order_date
+
+    entities:
+      - name: order_id
+        type: primary
+
+      - name: customer_id
+        type: foreign
+        dimension: customer_id
+
+    dimensions:
+      - name: order_date
+        type: time
+        type_params:
+          time_granularity: day
+
+      - name: order_status
+        type: categorical
+
+    measures:
+      - name: total_order_amount
+        description: "Total price of orders"
+        expr: total_price
+        agg: sum
+
+      - name: order_count
+        description: "Number of orders"
+        agg: count

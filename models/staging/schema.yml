@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: tpch_source
+    database: dbt
+    schema: dbt_raw
+    tables:
+      - name: orders
+        description: "Orders table from TPCH sample data"
